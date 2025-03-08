@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <time.h> 
+#include <omp.h>  
 
 int main()
 {
@@ -43,6 +44,8 @@ int main()
     }
     printf("\n");
     clock_t start = clock();
+    // OpenMP parallelized matrix multiplication
+    #pragma omp parallel for private(i, j, k) shared(A, B, C)
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 3; j++)
@@ -66,6 +69,6 @@ int main()
 
     
     double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("Sequential Execution Time: %f seconds\n", time_taken);
+    printf("Parallel Execution Time with OpenMP: %f seconds\n", time_taken);
     return 0;
 }
