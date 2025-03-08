@@ -43,6 +43,9 @@ int main()
         }
     }
     printf("\n");
+    int num_threads = 4; // Adjust based on CPU cores
+    omp_set_num_threads(num_threads);
+
     clock_t start = clock();
     // OpenMP parallelized matrix multiplication
     #pragma omp parallel for private(i, j, k) shared(A, B, C)
